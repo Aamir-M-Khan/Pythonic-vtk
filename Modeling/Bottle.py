@@ -45,6 +45,10 @@ def create_actor(mapper, color):
     actor = vtkActor()
     actor.SetMapper(mapper)
     actor.GetProperty().SetColor(set_color(color))
+    actor.GetProperty().SetDiffuse(0.7)
+    actor.GetProperty().SetSpecular(0.4)
+    actor.GetProperty().SetSpecularPower(20)
+    actor.GetProperty().BackfaceCullingOn()
     return actor
 
 def create_tube_filter(input_connection, number_of_sides, radius):
@@ -134,7 +138,7 @@ def main():
     renderer.SetBackground(colors.GetColor3d('Burlywood'))
 
     renWin.SetSize(640, 480)
-    renWin.SetWindowName('Bottle');
+    renWin.SetWindowName('Bottle')
     renWin.Render()
 
     renderer.GetActiveCamera().SetPosition(1, 0, 0)
