@@ -62,8 +62,10 @@ def main():
     delny = vtkDelaunay2D()
     delny.SetInputData(profile)
     delny.SetTolerance(0.001)
+
     mapMesh = vtkPolyDataMapper()
     mapMesh.SetInputConnection(delny.GetOutputPort())
+    
     meshActor = vtkActor()
     meshActor.SetMapper(mapMesh)
     meshActor.GetProperty().SetColor(colors.GetColor3d('MidnightBlue'))
@@ -91,11 +93,14 @@ def main():
     ball.SetRadius(0.025)
     ball.SetThetaResolution(12)
     ball.SetPhiResolution(12)
+    
     balls = vtkGlyph3D()
     balls.SetInputConnection(delny.GetOutputPort())
     balls.SetSourceConnection(ball.GetOutputPort())
+    
     mapBalls = vtkPolyDataMapper()
     mapBalls.SetInputConnection(balls.GetOutputPort())
+
     ballActor = vtkActor()
     ballActor.SetMapper(mapBalls)
     ballActor.GetProperty().SetColor(colors.GetColor3d('hot_pink'))
